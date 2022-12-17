@@ -19,16 +19,20 @@ class Result {
 public class client {
 
     static Result result = new Result(0,0);
+    public static String authorInput;
+    public static String minYearInupt;
+    public static String maxYearInput;
     public static String input;
     public static Socket[] socketList;
+    public static String[] filesList={"output_0001.xml","output_0002.xml","output_0003.xml","output_0004.xml"};
 
     static {
         try {
             socketList = new Socket[]{
-                    new Socket(InetAddress.getLocalHost(), 9996),
-                    new Socket(InetAddress.getLocalHost(), 9997),
-                    new Socket(InetAddress.getLocalHost(), 9998),
-                    new Socket(InetAddress.getLocalHost(), 9999),
+                new Socket(InetAddress.getLocalHost(), 9996),
+                new Socket(InetAddress.getLocalHost(), 9997),
+                new Socket(InetAddress.getLocalHost(), 9998),
+                new Socket(InetAddress.getLocalHost(), 9999),
             };
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -37,15 +41,37 @@ public class client {
 
     public static void main(String[] args) throws InterruptedException, IOException {
 
-        System.out.println("请输入作者姓名：");
-        Scanner author = new Scanner(System.in);
+        while(true){
+            System.out.println("请输入作者姓名：");
+            Scanner author = new Scanner(System.in);
+            authorInput = author.nextLine();
+            if(authorInput=="")
+                continue;
 
-        input = author.next();
+            System.out.println("请输入年份下限（可为空）");
+            Scanner minYear = new Scanner(System.in);
+            minYearInupt = minYear.nextLine();
 
-        LinkManager linkManager1 = new LinkManager(socketList,0,result);
-        LinkManager linkManager2 = new LinkManager(socketList,1,result);
-        LinkManager linkManager3 = new LinkManager(socketList,2,result);
-        LinkManager linkManager4 = new LinkManager(socketList,3,result);
+            System.out.println("请输入年份上限（可为空）");
+            Scanner maxYear = new Scanner(System.in);
+            maxYearInput = maxYear.nextLine();
+            
+            if(minYearInupt==""&&maxYearInput!=""){
+                input = authorInput + "~-~" + maxYearInput + "~";
+            } else if (minYearInupt!=""&&maxYearInput=="") {
+                input = authorInput + "~" + minYearInupt + "~-~";
+            } else if (minYearInupt==""&&maxYearInput=="") {
+                input = authorInput + "~";
+            } else if (minYearInupt!=""&&maxYearInput!="") {
+                input = authorInput + "~" + minYearInupt + "~" + maxYearInput + "~";
+            }
+            break;
+        }
+        
+        LinkManager linkManager1 = new LinkManager(socketList,filesList,0,result);
+        LinkManager linkManager2 = new LinkManager(socketList,filesList,1,result);
+        LinkManager linkManager3 = new LinkManager(socketList,filesList,2,result);
+        LinkManager linkManager4 = new LinkManager(socketList,filesList,3,result);
         Thread thread1 = new Thread(linkManager1);
         Thread thread2 = new Thread(linkManager2);
         Thread thread3 = new Thread(linkManager3);
@@ -75,13 +101,17 @@ public class client {
 class LinkManager implements Runnable {
 
     Socket[] socket;
+    String[] file;
     int serverNum;
     Result result;
+    String input;
 
-    public LinkManager(Socket[] socketList, int serverNum, Result result){
+    public LinkManager(Socket[] socketList,String[] file, int serverNum, Result result){
         this.socket=socketList;
         this.serverNum=serverNum;
         this.result=result;
+        this.file=file;
+        this.input=client.input;
     }
 
     public void linkServer() throws IOException{
@@ -95,7 +125,8 @@ class LinkManager implements Runnable {
 
         //3. 通过输出流，写入数据到 数据通道, 使用字符流
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
-        bufferedWriter.write(client.input);
+        System.out.println(input + file[serverNum]);
+        bufferedWriter.write(input + file[serverNum]);
         bufferedWriter.newLine();//插入一个换行符，表示写入的内容结束, 注意，要求对方使用readLine()!!!!
         bufferedWriter.flush();// 如果使用的字符流，需要手动刷新，否则数据不会写入数据通道
 
