@@ -1,10 +1,6 @@
 package com.dblp;
 
-
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
@@ -29,17 +25,17 @@ public class client {
     static {
         try {
             socketList = new Socket[]{
-                    new Socket(InetAddress.getLocalHost(), 9996),
-                    new Socket(InetAddress.getLocalHost(), 9997),
-                    new Socket(InetAddress.getLocalHost(), 9998),
-                    new Socket(InetAddress.getLocalHost(), 9999),
+                new Socket(InetAddress.getLocalHost(), 9996),
+                new Socket(InetAddress.getLocalHost(), 9997),
+                new Socket(InetAddress.getLocalHost(), 9998),
+                new Socket(InetAddress.getLocalHost(), 9999),
             };
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
 
         System.out.println("请输入作者姓名：");
         Scanner author = new Scanner(System.in);
@@ -63,8 +59,15 @@ public class client {
             Thread.sleep(1000);
             System.out.println("主线程输出count="+result.count);
             System.out.println("主线程输出articleNum="+result.articleNum);
-            if(result.count==4)
+            if(result.count==4){
+                //5. 关闭流对象和socket
+                socketList[0].close();
+                socketList[1].close();
+                socketList[2].close();
+                socketList[3].close();
+                System.out.println("客户端退出.....");
                 break;
+            }
         }
     }
 }
@@ -83,41 +86,34 @@ class LinkManager implements Runnable {
 
     public void linkServer() throws IOException{
         //1. 连接服务端 (ip , 端口）
-        //解读: 连接本机的 9999端口, 如果连接成功，返回Socket对象
+        //连接本机的端口, 如果连接成功，返回Socket对象
         System.out.println("客户端 socket返回=" + socket[serverNum].getClass());
+
+        socket[serverNum].setSoTimeout(5000);
         //2. 连接上后，生成Socket, 通过socket.getOutputStream()
         OutputStream outputStream = socket[serverNum].getOutputStream();
 
-        //3. 通过输出流，写入数据到 数据通道
-        outputStream.write(client.input.getBytes());
-        //   设置结束标记
-        socket[serverNum].shutdownOutput();
+        //3. 通过输出流，写入数据到 数据通道, 使用字符流
+        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
+        bufferedWriter.write(client.input);
+        bufferedWriter.newLine();//插入一个换行符，表示写入的内容结束, 注意，要求对方使用readLine()!!!!
+        bufferedWriter.flush();// 如果使用的字符流，需要手动刷新，否则数据不会写入数据通道
 
-        //4. 获取和socket关联的输入流. 读取数据(字节)，并显示
+        //4. 获取和socket关联的输入流. 读取数据(字符)，并显示
         InputStream inputStream = socket[serverNum].getInputStream();
-        DataInputStream dis = new DataInputStream(inputStream);
-        int number = dis.readInt();
-        System.out.println("number=" + number);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        String s = bufferedReader.readLine();
+        int number = Integer.parseInt(s);
+        System.out.println(s);
         System.out.println(Thread.currentThread().getName()+"准备修改count " + result.articleNum);
-
         //处理同步问题，加锁
         synchronized (result) {
             result.count+=1;
             result.articleNum +=number;
         }
-
         System.out.println(Thread.currentThread().getName()+"已修改count " + result.articleNum);
-//        byte[] buf = new byte[1024];
-//        int readLen = 0;
-//        while ((readLen = inputStream.read(buf)) != -1) {
-//            System.out.println(new String(buf, 0, readLen));
-//        }
-
-        //5. 关闭流对象和socket
-        inputStream.close();
-        outputStream.close();
-        socket[serverNum].close();
-        System.out.println("客户端退出.....");
+        bufferedReader.close();//关闭外层流
+        bufferedWriter.close();
     }
 
     @Override

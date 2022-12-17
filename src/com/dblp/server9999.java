@@ -1,10 +1,6 @@
 package com.dblp;
 
-
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -26,23 +22,23 @@ public class server9999 {
         //
         //3. 通过socket.getInputStream() 读取客户端写入到数据通道的数据, 显示
         InputStream inputStream = socket.getInputStream();
-        //4. IO读取
-        byte[] buf = new byte[1024];
-        int readLen = 0;
-        while ((readLen = inputStream.read(buf)) != -1) {
-            System.out.println(new String(buf, 0, readLen));//根据读取到的实际长度，显示内容.
-        }
+
+        //4. IO读取, 使用字符流, 老师使用 InputStreamReader 将 inputStream 转成字符流
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        String s = bufferedReader.readLine();
+        System.out.println(s);//输出
+
         //5. 获取socket相关联的输出流
         OutputStream outputStream = socket.getOutputStream();
-        DataOutputStream result = new DataOutputStream(outputStream);
-        result.writeInt(9999);
-        result.flush();
-        //   设置结束标记
-        socket.shutdownOutput();
+        //    使用字符输出流的方式回复信息
+        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
+        bufferedWriter.write(String.valueOf(9999));
+        bufferedWriter.newLine();// 插入一个换行符，表示回复内容的结束
+        bufferedWriter.flush();//注意需要手动的flush
 
         //6.关闭流和socket
-        outputStream.close();
-        inputStream.close();
+//        bufferedWriter.close();
+        bufferedReader.close();
         socket.close();
         serverSocket.close();//关闭
 

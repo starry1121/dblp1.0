@@ -5,16 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a011e66-6928-47fa-8579-6aa7fcea25bb" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dblp.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/dblp/client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/dblp/server9996.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/dblp/server9997.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/dblp/server9998.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/dblp/server9999.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dblp/client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dblp/client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dblp/server9996.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dblp/server9996.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dblp/server9997.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dblp/server9997.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dblp/server9998.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dblp/server9998.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dblp/server9999.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dblp/server9999.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,10 +45,11 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="应用程序.server9996">
+  <component name="RunManager" selected="应用程序.client">
     <configuration name="client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.dblp.client" />
       <module name="dblp" />
@@ -79,10 +76,52 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="server9997" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.dblp.server9997" />
+      <module name="dblp" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.dblp.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="server9998" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.dblp.server9998" />
+      <module name="dblp" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.dblp.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="server9999" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.dblp.server9999" />
+      <module name="dblp" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.dblp.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.server9996" />
         <item itemvalue="应用程序.client" />
+        <item itemvalue="应用程序.server9996" />
+        <item itemvalue="应用程序.server9997" />
+        <item itemvalue="应用程序.server9998" />
+        <item itemvalue="应用程序.server9999" />
       </list>
     </recent_temporary>
   </component>
@@ -95,6 +134,13 @@
       <option name="presentableId" value="Default" />
       <updated>1671171352847</updated>
       <workItem from="1671171355342" duration="437000" />
+      <workItem from="1671172000254" duration="86000" />
+      <workItem from="1671172302305" duration="2252000" />
+      <workItem from="1671175701305" duration="361000" />
+      <workItem from="1671177078741" duration="691000" />
+      <workItem from="1671179376982" duration="80000" />
+      <workItem from="1671207853258" duration="786000" />
+      <workItem from="1671244571742" duration="4732000" />
     </task>
     <servers />
   </component>
