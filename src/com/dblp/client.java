@@ -25,10 +25,10 @@ public class client {
     static {
         try {
             socketList = new Socket[]{
-                new Socket(InetAddress.getLocalHost(), 9996),
-                new Socket(InetAddress.getLocalHost(), 9997),
-                new Socket(InetAddress.getLocalHost(), 9998),
-                new Socket(InetAddress.getLocalHost(), 9999),
+                    new Socket(InetAddress.getLocalHost(), 9996),
+                    new Socket(InetAddress.getLocalHost(), 9997),
+                    new Socket(InetAddress.getLocalHost(), 9998),
+                    new Socket(InetAddress.getLocalHost(), 9999),
             };
         } catch (IOException e) {
             throw new RuntimeException(e);

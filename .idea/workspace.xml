@@ -7,9 +7,6 @@
     <list default="true" id="9a011e66-6928-47fa-8579-6aa7fcea25bb" name="变更" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/dblp/client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dblp/client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dblp/server9996.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dblp/server9996.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dblp/server9997.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dblp/server9997.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dblp/server9998.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dblp/server9998.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/dblp/server9999.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dblp/server9999.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,19 +33,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Boaibai/Desktop/分布式/chapter21&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="应用程序.client">
     <configuration name="client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.dblp.client" />
@@ -141,6 +139,7 @@
       <workItem from="1671179376982" duration="80000" />
       <workItem from="1671207853258" duration="786000" />
       <workItem from="1671244571742" duration="4732000" />
+      <workItem from="1671254562593" duration="3502000" />
     </task>
     <servers />
   </component>
