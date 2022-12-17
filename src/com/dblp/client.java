@@ -107,6 +107,8 @@ class LinkManager implements Runnable {
     Socket[] socket;
     String[] file;
     int serverNum;
+    boolean flag = true;
+    int search = 0;
     Result result;
     String input;
 
@@ -119,53 +121,58 @@ class LinkManager implements Runnable {
     }
 
     public void linkServer() throws IOException{
-        //1. 连接服务端 (ip , 端口）
-        //连接本机的端口, 如果连接成功，返回Socket对象
-        System.out.println("客户端 socket返回=" + socket[serverNum].getClass());
 
-        socket[serverNum].setSoTimeout(5000);
-        //2. 连接上后，生成Socket, 通过socket.getOutputStream()
-        OutputStream outputStream = socket[serverNum].getOutputStream();
+        while(flag) {
+            //1. 连接服务端 (ip , 端口）
+            //连接本机的端口, 如果连接成功，返回Socket对象
+            System.out.println("客户端 socket返回=" + socket[serverNum].getClass());
 
-        //3. 通过输出流，写入数据到 数据通道, 使用字符流
-        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
-        System.out.println(input + file[serverNum]);
-        bufferedWriter.write(input + file[serverNum]);
-        bufferedWriter.newLine();//插入一个换行符，表示写入的内容结束, 注意，要求对方使用readLine()!!!!
-        bufferedWriter.flush();// 如果使用的字符流，需要手动刷新，否则数据不会写入数据通道
-        
-        BufferedReader bufferedReader = null;
-        try{
-            //4. 获取和socket关联的输入流. 读取数据(字符)，并显示
-            socket[serverNum].setSoTimeout(200);
+            socket[serverNum].setSoTimeout(5000);
+            //2. 连接上后，生成Socket, 通过socket.getOutputStream()
+            OutputStream outputStream = socket[serverNum].getOutputStream();
 
-            InputStream inputStream = socket[serverNum].getInputStream();
-            byte[] buf = new byte[1024];
-            int readLen = 0;
-            String s = null;
-            while ((readLen = inputStream.read(buf)) != -1) {
-                s = new String(buf, 0, readLen);
-            }
-            
-            System.out.println(Thread.currentThread().getName()+"准备修改count " + result.articleNum);
-            //处理同步问题，加锁
-            synchronized (result) {
-                result.count+=1;
-                result.articleNum +=Integer.parseInt(s);
-            }
-            System.out.println(Thread.currentThread().getName()+"已修改count " + result.articleNum);
-        }catch (SocketTimeoutException e) {
-            System.out.println("服务器挂喽！");
-        } finally {
-            if (bufferedReader != null) {
-                try {
-                    bufferedReader.close();
-                } catch (IOException e) {
+            //3. 通过输出流，写入数据到 数据通道, 使用字符流
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
+            System.out.println(input + file[serverNum]);
+            bufferedWriter.write(input + file[serverNum]);
+            bufferedWriter.newLine();//插入一个换行符，表示写入的内容结束, 注意，要求对方使用readLine()!!!!
+            bufferedWriter.flush();// 如果使用的字符流，需要手动刷新，否则数据不会写入数据通道
+
+            BufferedReader bufferedReader = null;
+            try {
+                //4. 获取和socket关联的输入流. 读取数据(字符)，并显示
+                socket[serverNum].setSoTimeout(200);
+
+                InputStream inputStream = socket[serverNum].getInputStream();
+                byte[] buf = new byte[1024];
+                int readLen = 0;
+                String s = null;
+                while ((readLen = inputStream.read(buf)) != -1) {
+                    s = new String(buf, 0, readLen);
+                }
+
+                System.out.println(Thread.currentThread().getName() + "准备修改count " + result.articleNum);
+                //处理同步问题，加锁
+                synchronized (result) {
+                    result.count += 1;
+                    result.articleNum += Integer.parseInt(s);
+                }
+                System.out.println(Thread.currentThread().getName() + "已修改count " + result.articleNum);
+                this.flag = false;
+                System.out.println("已查询到结果！");
+            } catch (SocketTimeoutException e) {
+                this.search++;
+                if (this.serverNum < 3) {
+                    this.serverNum++;
+                } else if (this.serverNum == 3) {
+                    this.serverNum = 0;
+                }
+                if (this.search > 2) {
+                    this.flag = false;
+                    System.out.println("已搜索完所有副本，未查询到结果！");
                 }
             }
         }
-
-        bufferedWriter.close();
     }
 
     @Override
