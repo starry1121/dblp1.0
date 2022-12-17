@@ -31,15 +31,12 @@ public class server9997 {
 
         //5. 获取socket相关联的输出流
         OutputStream outputStream = socket.getOutputStream();
-        //    使用字符输出流的方式回复信息
-        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
-        bufferedWriter.write(String.valueOf(9997));
-        bufferedWriter.newLine();// 插入一个换行符，表示回复内容的结束
-        bufferedWriter.flush();//注意需要手动的flush
+        outputStream.write("9997".getBytes());
+        socket.shutdownOutput();
 
         //6.关闭流和socket
-        bufferedWriter.close();
-        bufferedReader.close();
+        outputStream.close();
+        inputStream.close();
         socket.close();
         serverSocket.close();//关闭
 

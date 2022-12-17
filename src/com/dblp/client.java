@@ -3,6 +3,7 @@ package com.dblp;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.Scanner;
 
 class Result {
@@ -76,6 +77,7 @@ public class client {
         Thread thread2 = new Thread(linkManager2);
         Thread thread3 = new Thread(linkManager3);
         Thread thread4 = new Thread(linkManager4);
+        long t1 = 0;
         thread1.start();//启动第1个线程
         thread2.start();//启动第2个线程
         thread3.start();//启动第3个线程
@@ -92,6 +94,8 @@ public class client {
                 socketList[2].close();
                 socketList[3].close();
                 System.out.println("客户端退出.....");
+                long t2 = System.currentTimeMillis();
+                System.out.println("查询用时：" + (t2 - t1) + "ms");
                 break;
             }
         }
@@ -129,21 +133,38 @@ class LinkManager implements Runnable {
         bufferedWriter.write(input + file[serverNum]);
         bufferedWriter.newLine();//插入一个换行符，表示写入的内容结束, 注意，要求对方使用readLine()!!!!
         bufferedWriter.flush();// 如果使用的字符流，需要手动刷新，否则数据不会写入数据通道
+        
+        BufferedReader bufferedReader = null;
+        try{
+            //4. 获取和socket关联的输入流. 读取数据(字符)，并显示
+            socket[serverNum].setSoTimeout(200);
 
-        //4. 获取和socket关联的输入流. 读取数据(字符)，并显示
-        InputStream inputStream = socket[serverNum].getInputStream();
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        String s = bufferedReader.readLine();
-        int number = Integer.parseInt(s);
-        System.out.println(s);
-        System.out.println(Thread.currentThread().getName()+"准备修改count " + result.articleNum);
-        //处理同步问题，加锁
-        synchronized (result) {
-            result.count+=1;
-            result.articleNum +=number;
+            InputStream inputStream = socket[serverNum].getInputStream();
+            byte[] buf = new byte[1024];
+            int readLen = 0;
+            String s = null;
+            while ((readLen = inputStream.read(buf)) != -1) {
+                s = new String(buf, 0, readLen);
+            }
+            
+            System.out.println(Thread.currentThread().getName()+"准备修改count " + result.articleNum);
+            //处理同步问题，加锁
+            synchronized (result) {
+                result.count+=1;
+                result.articleNum +=Integer.parseInt(s);
+            }
+            System.out.println(Thread.currentThread().getName()+"已修改count " + result.articleNum);
+        }catch (SocketTimeoutException e) {
+            System.out.println("服务器挂喽！");
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException e) {
+                }
+            }
         }
-        System.out.println(Thread.currentThread().getName()+"已修改count " + result.articleNum);
-        bufferedReader.close();//关闭外层流
+
         bufferedWriter.close();
     }
 
