@@ -6,7 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="9a011e66-6928-47fa-8579-6aa7fcea25bb" name="变更" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dblp/client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dblp/client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dblp/client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/client/client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dblp/server9996.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/client/server9996.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dblp/server9997.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/client/server9997.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dblp/server9998.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/client/server9998.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dblp/server9999.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/client/server9999.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,11 +52,11 @@
 }</component>
   <component name="RunManager" selected="应用程序.server9999">
     <configuration name="client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.dblp.client" />
+      <option name="MAIN_CLASS_NAME" value="com.client.client" />
       <module name="dblp" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.dblp.*" />
+          <option name="PATTERN" value="com.client.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -61,11 +65,11 @@
       </method>
     </configuration>
     <configuration name="server9996" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.dblp.server9996" />
+      <option name="MAIN_CLASS_NAME" value="com.client.server9996" />
       <module name="dblp" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.dblp.*" />
+          <option name="PATTERN" value="com.client.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -74,11 +78,11 @@
       </method>
     </configuration>
     <configuration name="server9997" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.dblp.server9997" />
+      <option name="MAIN_CLASS_NAME" value="com.client.server9997" />
       <module name="dblp" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.dblp.*" />
+          <option name="PATTERN" value="com.client.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -87,11 +91,11 @@
       </method>
     </configuration>
     <configuration name="server9998" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.dblp.server9998" />
+      <option name="MAIN_CLASS_NAME" value="com.client.server9998" />
       <module name="dblp" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.dblp.*" />
+          <option name="PATTERN" value="com.client.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -100,11 +104,11 @@
       </method>
     </configuration>
     <configuration name="server9999" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.dblp.server9999" />
+      <option name="MAIN_CLASS_NAME" value="com.client.server9999" />
       <module name="dblp" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.dblp.*" />
+          <option name="PATTERN" value="com.client.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -139,7 +143,7 @@
       <workItem from="1671207853258" duration="786000" />
       <workItem from="1671244571742" duration="4732000" />
       <workItem from="1671254562593" duration="3502000" />
-      <workItem from="1671258420908" duration="7913000" />
+      <workItem from="1671258420908" duration="9727000" />
     </task>
     <servers />
   </component>

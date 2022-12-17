@@ -1,4 +1,4 @@
-package com.dblp;
+package com.client;
 
 import java.io.*;
 import java.net.InetAddress;
